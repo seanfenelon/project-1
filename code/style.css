@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid grey;
+  width: 600px;
+  height: 600px;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: 11%;
+  height: 11%;
+  border: 1px solid green;
+}
+.ship {
+  background-image: url('ship.jpeg');
+  background-size: contain;
+}
+.alien {
+  background-image: url('alien.png');
+  background-size: contain;
+}
+.bomb {
+  background-image: url('bomb.png');
+  background-size: contain;
+}
+.bullet {
+  background-image: url('bullet.jpg');
+  background-size: contain;
+}
