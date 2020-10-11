@@ -1,12 +1,21 @@
 const grid = document.querySelector('.grid')
-
+const healthDisplay = document.querySelector('#health')
+const scoreDisplay = document.querySelector('#score')
+const highscoreDisplay = document.querySelector('#highscore')
 // Specifying the width of the grid.
-const width = 9
+const width = 15
 // If I start harry off as undefined, this could
-let ship = 75
-let aliensCurrent = [2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 20, 21, 22, 23, 24]
+let ship = 217
+let aliensCurrent = [4, 5, 6, 7, 8, 9, 10, 19, 20, 21, 22, 23, 24, 25, 34, 35, 36, 37, 38, 39, 40]
+
 let aliensPrevious = []
 let health = 3
+let score = 0
+let highscore = 0
+
+healthDisplay.innerHTML = health 
+scoreDisplay.innerHTML = score
+highscoreDisplay.innerHTML = highscore
 
 const startButton = document.querySelector('#start')
 const resetButton = document.querySelector('#reset')
@@ -35,11 +44,11 @@ aliensCurrent.forEach((alien) => {
 
 document.addEventListener('keypress', (event) => {
 const key = event.key
-  if (key === 'a' && (ship > 72)) {
+  if (key === 'a' && (ship > 210)) {
     cells[ship].classList.remove('ship')
     ship -= 1
     cells[ship].classList.add('ship')
-  } else if (key === 's' && (ship < 80)) {
+  } else if (key === 's' && (ship < 224)) {
     cells[ship].classList.remove('ship')
     ship +=1
     cells[ship].classList.add('ship')
@@ -49,9 +58,11 @@ const key = event.key
     moveRight()
   } else if (key === 'p') {
     moveAliens()
-  } else if (key === 'l') {
-    playerShoot()
-  }
+  } 
+  // else if (key === 'l') {
+  //   playerShoot()
+  // }
+  
 })
 
 function moveAliens() {
@@ -111,7 +122,7 @@ function moveAliens() {
     if (distanceRight < width - 1) {
       aliensPrevious = aliensCurrent
       aliensCurrent = aliensCurrent.map(x => x + 1)
-    } else if (distanceRight === 8 && aliensCurrent[0] - 1 === aliensPrevious[0]) {
+    } else if (distanceRight === width - 1 && aliensCurrent[0] - 1 === aliensPrevious[0]) {
       aliensPrevious = aliensCurrent
       aliensCurrent = aliensCurrent.map(x => x + width)
     } else moveLeft()
@@ -128,40 +139,62 @@ startButton.addEventListener('click', () => {
 })
 
 resetButton.addEventListener('click', () => {
-  console.log(aliensCurrent)
-  aliensCurrent.forEach((alien) => {
-    cells[alien].classList.remove('alien')
-  })
-  aliensCurrent = [2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 20, 21, 22, 23, 24]
+  // aliensCurrent.forEach((alien) => {
+  //   cells[alien].classList.remove('alien')
+  // })
+  aliensCurrent = [4, 5, 6, 7, 8, 9, 10, 19, 20, 21, 22, 23, 24, 25, 34, 35, 36, 37, 38, 39, 40]
   aliensPrevious = []
   aliensCurrent.forEach((alien) => {
     cells[alien].classList.add('alien')
   })
   startButton.disabled = false
   clearInterval(letsGo)
+  clearInterval(generateBombInterval)
+  clearInterval(shootInterval)
+
+
   health = 3
 })
 
 function alienBomb() {
+  
   let randomIndex = aliensCurrent[Math.floor(Math.random() * aliensCurrent.length)]
   cells[randomIndex].classList.add('bomb')
-  
-  
+
   const generateBombInterval = setInterval(() => {
-    
-    cells[randomIndex].classList.remove('bomb')
-    randomIndex += width
-    cells[randomIndex].classList.add('bomb')
-    
-    if (randomIndex >= (width * (width - 1))) {
-      cells[randomIndex].classList.remove('bomb')
-      clearInterval(generateBombInterval)
+    if (cells[randomIndex].classList.contains('bomb') && aliensCurrent.length !== 0) {
+     
+      if (cells[randomIndex].classList.contains('bullet')) {
+        clearInterval(generateBombInterval)
+        console.log('hit')
+        cells[randomIndex].classList.remove('bullet')
+
+      } else {
+        cells[randomIndex].classList.remove('bomb')
+        randomIndex += width
+        cells[randomIndex].classList.add('bomb')
+        
+        if (randomIndex >= (width * (width - 1))) {
+          cells[randomIndex].classList.remove('bomb')
+          clearInterval(generateBombInterval)
+        }
+        if (cells[randomIndex].classList.contains('ship')) {
+          health = health - 1
+          healthDisplay.innerHTML = health 
+          console.log(health)
+        }
+        if (cells[randomIndex].classList.contains('bullet')) {
+          cells[randomIndex].classList.remove('bomb')
+          clearInterval(generateBombInterval)
+          console.log('hit')
+          cells[randomIndex].classList.remove('bullet')
+        }
+        if (health < 1) {
+          clearInterval(generateBombInterval)
+        }
+      }
     }
-    if (cells[randomIndex].classList.contains('ship')) {
-      health = health - 1
-      console.log(health)
-    }
-    if (health < 1) {
+    else {
       clearInterval(generateBombInterval)
     }
   }, 1000)
@@ -169,48 +202,84 @@ function alienBomb() {
 
 function gameStart() {
   
+  playerShoot()
+
   const letsGo = setInterval(() => {
     moveAliens()
-    
+    // IF ALIENS REACH BOTTOM OF GRID
     if (aliensCurrent[aliensCurrent.length - 1] >= (width * (width - 1))) {
-      window.alert('YOU SUCK!')
+      window.alert(`YOU SUCK!`  + `Final score = ${score}`)
       clearInterval(letsGo)
+      clearInterval(dropBombs)
+      clearInterval(shootInterval)
     }
+    // IF RUN OUT OF LIVES
     if (health < 1) {
       clearInterval(letsGo)
+      clearInterval(dropBombs)
+      clearInterval(shootInterval)
+      window.alert(`YOU SUUUUUUCK \n` + `Final score = ${score}`)
     }
-  }, 2000)
+    //IF ALL ALIENS ARE DEAD
+    if (aliensCurrent.length === 0) {
+      clearInterval(letsGo)
+      clearInterval(dropBombs)
+      clearInterval(shootInterval)
+      window.alert(`YOU WIN\n` + `Final score = ${score}`)
+    }
+  }, 500)
+
   const dropBombs = setInterval (() => {
     alienBomb()
-    if (health < 1) {
-      clearInterval(dropBombs)
-    }
   }, 2000)
 console.log(health)
 }
 
 function playerShoot() {
-  let bulletIndex = ship - width
-  cells[bulletIndex].classList.add('bullet')
-  
-  const shootInterval = setInterval(() => {
-    cells[bulletIndex].classList.remove('bullet')
-    bulletIndex = bulletIndex - width
-    cells[bulletIndex].classList.add('bullet')
-    if (bulletIndex < width) {
-  
-      clearInterval(shootInterval)
-      cells[bulletIndex].classList.remove('bullet')
-    }
-    if (cells[bulletIndex].classList.contains('alien')) {
-      console.log('bang')
-      clearInterval(shootInterval)
-      cells[bulletIndex].classList.remove('bullet', 'alien')
-      const alienIndex = aliensCurrent.indexOf(bulletIndex)
-      alienRemoved = aliensCurrent.splice(alienIndex, 1)
-      console.log(aliensCurrent)
-      
 
+  document.addEventListener('keypress', (event) => {
+    const key = event.key
+    if (key === 'l') {
+      
+   
+      let bulletIndex = ship - width
+      cells[bulletIndex].classList.add('bullet')
+      
+      const shootInterval = setInterval(() => {
+        if (cells[bulletIndex].classList.contains('bullet')) {
+
+          if (cells[bulletIndex].classList.contains('bomb')) {
+            clearInterval(shootInterval)
+            cells[bulletIndex].classList.remove('bullet')
+          } else {
+            cells[bulletIndex].classList.remove('bullet')
+            bulletIndex = bulletIndex - width
+            cells[bulletIndex].classList.add('bullet')
+          }
+          if (bulletIndex < width) {
+            clearInterval(shootInterval)
+            cells[bulletIndex].classList.remove('bullet')
+          }
+          if (cells[bulletIndex].classList.contains('alien')) {
+            clearInterval(shootInterval)
+            cells[bulletIndex].classList.remove('bullet', 'alien')
+            const alienIndex = aliensCurrent.indexOf(bulletIndex)
+            const alienRemoved = aliensCurrent.splice(alienIndex, 1)
+            score = score + 100
+            scoreDisplay.innerHTML = score
+          }
+          if (cells[bulletIndex].classList.contains('bomb')) {
+            cells[bulletIndex].classList.remove('bullet')
+            clearInterval(shootInterval)
+            console.log('bomb')
+            cells[bulletIndex].classList.remove('bomb')
+          }
+        } 
+        else {
+          clearInterval(shootInterval)
+        }
+        
+      }, 500)
     }
-  }, 200)
+  })
 }

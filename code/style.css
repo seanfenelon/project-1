@@ -21,8 +21,8 @@ body {
 }
 
 .cell {
-  width: 11%;
-  height: 11%;
+  width: 6.66%;
+  height: 6.66%;
   border: 1px solid green;
 }
 .ship {
@@ -30,7 +30,7 @@ body {
   background-size: contain;
 }
 .alien {
-  background-image: url('alien.png');
+  background-image: url('alien1.jpeg');
   background-size: contain;
 }
 .bomb {
