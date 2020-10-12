@@ -15,15 +15,15 @@ body {
   display: flex;
   flex-direction: row;
   border: 1px solid grey;
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   flex-wrap: wrap;
 }
 
 .cell {
   width: 6.66%;
   height: 6.66%;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 .ship {
   background-image: url('ship.jpeg');
