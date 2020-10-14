@@ -5,18 +5,44 @@
 body {
   height: 100vh;
   display: flex;
+
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin: 0
+  margin: 0;
+  background-color: black;
+  color: white;
 }
 
+.scoreboard {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  border: 5px solid greenyellow;
+  margin: 20px;
+}
+
+.game {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid greenyellow;
+  margin: 20px;
+}
 .grid {
   display: flex;
   flex-direction: row;
   border: 1px solid grey;
-  width: 500px;
-  height: 500px;
+  width: 80%;
+  height: 400px;
+
+
   flex-wrap: wrap;
 }
 
@@ -26,18 +52,32 @@ body {
   /* border: 1px solid green; */
 }
 .ship {
-  background-image: url('ship.jpeg');
+  background-image: url('ship_new.png');
   background-size: contain;
 }
 .alien {
-  background-image: url('alien1.jpeg');
-  background-size: contain;
+  background-image: url('alien_new.png');
+  background-size: cover;
 }
 .bomb {
   background-image: url('bomb.png');
   background-size: contain;
 }
 .bullet {
-  background-image: url('bullet.jpg');
+  background-image: url('new_nullet.png');
   background-size: contain;
+  /* position: relative;
+  width: 5px;
+  height: 20px;
+  background: red;
+  left: 5;
+  bottom: 0;  */
+}
+.stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+p {
+  padding: 20px;
 }

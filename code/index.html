@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>SPACE INVADERS</title>
 </head>
+
 <body>
-  <p>Health: <span id="health"></span></p>
-  <p>Score: <span id="score"></span></p>
-  <p>Highscore: <span id="highscore"></span></p>
-  <p>Wave: <span id="wave"></span></p>
-  <div class="grid">
+  <section class="game">
+    <section class="stats">
+      <p>Health: <span id="health"></span></p>
+      <p>Score: <span id="score"></span></p>
+      
+      <p>Wave: <span id="wave"></span></p>
+    </section>
+    <div class="grid">
+    </div>
+    <div id="buttons">
+      <button id="start">Start</button>
+      <button id="reset">reset</button>
+    </div>
+  </section>
+
+  <div class="scoreboard">
+    <h2>Highscore</h2>
+    <ol></ol>
+    <button id="newgame">NEW GAME</button>
   </div>
-  <button id="start">Start</button>
-  <button id="reset">reset</button>
+  <!-- <script src="apps copy.js"></script> -->
   <script src="apps.js"></script>
 </body>
+
 </html>
