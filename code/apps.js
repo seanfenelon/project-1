@@ -3,6 +3,10 @@ const healthDisplay = document.querySelector('#health')
 const scoreDisplay = document.querySelector('#score')
 // const highscoreDisplay = document.querySelector('#highscore')
 const waveDisplay = document.querySelector('#wave')
+const gameScreen = document.querySelector('.gameScreen')
+const gameOverScreen = document.querySelector('.gameOver')
+const startScreen = document.querySelector('.startScreen')
+const finalScore = document.querySelector('#finalScore')
 // Specifying the width of the grid.
 const width = 15
 
@@ -15,7 +19,7 @@ let score = 0
 let highscore = 0
 let reset = 1
 let wave = 1
-let shootDelay = true
+let shootDelay
 let newName
 // localStorage.clear()
 // scoreboard
@@ -24,14 +28,21 @@ let playerScores = []
 const scoresList = document.querySelector('ol')
 const newGame = document.querySelector('#newgame')
 
+//HIDE SCREENS
+gameScreen.style.display = 'none'
+gameOverScreen.style.display = 'none'
+
+
 // IF NO LOCAL STORAGE
-// if (localStorage !== undefined) {
-//   playerScores = JSON.parse(localStorage.getItem('scores'))
-//   orderAndDisplayScores()
-// }
+if (localStorage !== undefined) {
+  playerScores = JSON.parse(localStorage.getItem('scores'))
+  orderAndDisplayScores()
+}
 
 newGame.addEventListener('click', () => {
   newName = prompt('By what name are you known?')
+  gameScreen.style.display = 'flex'
+  startScreen.style.display = 'none'
 })
 
 function addHighscore() {
@@ -67,7 +78,7 @@ scoreDisplay.innerHTML = score
 waveDisplay.innerHTML = wave
 
 const startButton = document.querySelector('#start')
-const resetButton = document.querySelector('#reset')
+// const resetButton = document.querySelector('#reset')
 // Keep track of my cells
 const cells = []
 
@@ -92,11 +103,11 @@ aliensCurrent.forEach((alien) => {
 
 document.addEventListener('keypress', (event) => {
 const key = event.key
-  if (key === 'a' && (ship > 210)) {
+  if ((key === 'a' || key === 'A') && (ship > ((width ** 2) - width))) {
     cells[ship].classList.remove('ship')
     ship -= 1
     cells[ship].classList.add('ship')
-  } else if (key === 's' && (ship < 224)) {
+  } else if ((key === 's' || key === 'S') && (ship < ((width ** 2) - 1))) {
     cells[ship].classList.remove('ship')
     ship +=1
     cells[ship].classList.add('ship')
@@ -194,8 +205,11 @@ startButton.addEventListener('click', () => {
   reset = 1
 })
 
-resetButton.addEventListener('click', () => {
-  
+// resetButton.addEventListener('click', () => {
+//   resetGame()
+// })
+
+function resetGame() {
   for (let i = 0; i < width ** 2; i++) {
     cells[i].classList.remove('alien', 'bullet', 'bomb')
   }
@@ -213,12 +227,12 @@ resetButton.addEventListener('click', () => {
   reset = 0
   wave = 1
   waveDisplay.innerHTML = wave
-})
+}
 
 function alienBomb(intervalMultiplier) {
 
   let exposedAliens = []
-  let intervalLength = (500 * intervalMultiplier)
+  let intervalLength = (100 * intervalMultiplier)
 
   for (let i = 0; i < aliensCurrent.length; i++){
     if (!(aliensCurrent.includes(aliensCurrent[i] + width) || aliensCurrent.includes(aliensCurrent[i] + (width * 2)))) {
@@ -283,7 +297,8 @@ function gameStart(intervalMultiplier) {
         addHighscore()
         clearInterval(letsGo)
         clearInterval(dropBombs)
-        window.alert(`YOU SUCK! \n`  + `Final score = ${score}`)
+        gameOver()
+        // window.alert(`YOU SUCK! \n`  + `Final score = ${score}`)
         
         // clearInterval(shootInterval)
       }
@@ -292,8 +307,9 @@ function gameStart(intervalMultiplier) {
         clearInterval(letsGo)
         clearInterval(dropBombs)
         addHighscore()
+        gameOver()
         // clearInterval(shootInterval)
-        window.alert(`YOU SUUUUUUCK \n` + `Final score = ${score}`)
+        // window.alert(`YOU SUUUUUUCK \n` + `Final score = ${score}`)
       }
       //IF ALL ALIENS ARE DEAD
       if (aliensCurrent.length === 0) {
@@ -325,17 +341,12 @@ function gameStart(intervalMultiplier) {
 }
 
 function playerShoot(intervalMultiplier) {
-  const intervalLength = (500 * intervalMultiplier)
+  const intervalLength = (100 * intervalMultiplier)
 
   document.addEventListener('keypress', (event) => {
     const key = event.key
-    if (key === 'l' && shootDelay) {
-      
-      shootDelay = false
-      setTimeout(() => {
-        shootDelay = true
-      }, 200)
-
+    if (key === 'l' && shootDelay !== false) {
+    
       let bulletIndex = ship - width
       cells[bulletIndex].classList.add('bullet')
       
@@ -359,7 +370,8 @@ function playerShoot(intervalMultiplier) {
             clearInterval(shootInterval)
             cells[bulletIndex].classList.remove('bullet', 'alien')
             const alienIndex = aliensCurrent.indexOf(bulletIndex)
-            const alienRemoved = aliensCurrent.splice(alienIndex, 1)
+            aliensCurrent.splice(alienIndex, 1)
+            aliensPrevious.splice(alienIndex, 1)
             score = score + 100
             scoreDisplay.innerHTML = score
           }
@@ -369,11 +381,17 @@ function playerShoot(intervalMultiplier) {
             cells[bulletIndex].classList.remove('bomb')
           }
         } 
+
         else {
           clearInterval(shootInterval)
         }
         
       }, intervalLength)
+      
+      setTimeout(() => {
+        return shootDelay = true
+      }, 500)
+      return shootDelay = false
     }
   })
 }
@@ -396,4 +414,16 @@ function nextWave() {
   // score = score
   reset = 0
   waveDisplay.innerHTML = wave
+
+}
+
+function gameOver() {
+  console.log(score)
+  gameScreen.style.display = 'none'
+  gameOverScreen.style.display = 'flex'
+  finalScore.innerHTML = `${score}`
+  setTimeout(() => {
+    gameOverScreen.style.display = 'none'
+    startScreen.style.display = 'flex'
+  }, 10000)
 }

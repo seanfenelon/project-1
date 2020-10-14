@@ -5,32 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <title>SPACE INVADERS</title>
 </head>
 
 <body>
-  <section class="game">
-    <section class="stats">
-      <p>Health: <span id="health"></span></p>
-      <p>Score: <span id="score"></span></p>
-      
-      <p>Wave: <span id="wave"></span></p>
-    </section>
-    <div class="grid">
-    </div>
-    <div id="buttons">
-      <button id="start">Start</button>
-      <button id="reset">reset</button>
-    </div>
-  </section>
+  <header>--- SPACE INVADERS ---</header>
 
-  <div class="scoreboard">
-    <h2>Highscore</h2>
-    <ol></ol>
-    <button id="newgame">NEW GAME</button>
-  </div>
-  <!-- <script src="apps copy.js"></script> -->
-  <script src="apps.js"></script>
+  <main>
+    <section class="startScreen">
+      <h1>NEW GAME</h1>
+      <div class="scoreboard">
+        <h2>HIGHSCORE</h2>
+        <ol></ol>
+        <input type="text" id="playerName">
+        <button id="newgame">START</button>
+      </div>
+    </section>
+
+    <section class="gameScreen">
+      <section class="game">
+        <section class="stats">
+          <p>HEALTH: <span id="health"></span></p>
+          <p>SCORE: <span id="score"></span></p>
+
+          <p>WAVE: <span id="wave"></span></p>
+        </section>
+        <div class="grid">
+        </div>
+        <div id="buttons">
+          <button id="start">START</button>
+          <!-- <button id="reset">reset</button> -->
+        </div>
+      </section>
+    </section>
+
+
+    <section class="gameOver">
+      <h1>GAME OVER</h1>
+      <p>FINAL SCORE: <span id="finalScore"></span></p>
+      <!-- <div class="scoreboard">
+      <h2>HIGHSCORE</h2>
+      <ol></ol>
+      <input type="text" id="playerName">
+      <button id="newgame">NEW GAME</button>
+    </div> -->
+
+    </section>
+    <!-- <script src="apps copy.js"></script> -->
+    <script src="apps.js"></script>
+  </main>
 </body>
 
 </html>
