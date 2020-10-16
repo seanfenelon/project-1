@@ -260,9 +260,9 @@ function alienBomb(intervalMultiplier) {
   cells[randomIndex].classList.add('bomb')
 
   const generateBombInterval = setInterval(() => {
-    if (aliensCurrent[aliensCurrent.length - 1] >= (width * (width - 1))) {
-      clearInterval(generateBombInterval)
-    }
+    // if (aliensCurrent[aliensCurrent.length - 1] >= (width * (width - 1))) {
+    //   clearInterval(generateBombInterval)
+    // }
     if (cells[randomIndex].classList.contains('bomb') && aliensCurrent.length !== 0 && reset !== 0 && aliensCurrent[aliensCurrent.length - 1] < (width * (width - 1))) {
      
       if (cells[randomIndex].classList.contains('bullet')) {
@@ -318,7 +318,7 @@ function gameStart(intervalMultiplier) {
         addHighscore()
         clearInterval(letsGo)
         clearInterval(dropBombs)
-        clearInterval(generateBombInterval)
+        // clearInterval(generateBombInterval)
         gameOver()
         // window.alert(`YOU SUCK! \n`  + `Final score = ${score}`)
         
