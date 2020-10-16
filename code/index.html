@@ -14,11 +14,16 @@
 
   <main>
     <section class="startScreen">
-      <h1>NEW GAME</h1>
+      <!-- <h1>NEW GAME</h1> -->
+      <h2>HOW TO PLAY</h2>
+      <p>** Kill all the invaders before they reach your HQ **</p>
+      <p>** Use 'a' and 's' to avoid being shot by the invaders **</p>
+      <p>** Use 's' to shoot the invaders **</p>
+
       <div class="scoreboard">
-        <h2>HIGHSCORE</h2>
+        <h2>HIGHSCORES</h2>
         <ol></ol>
-        <input type="text" id="playerName">
+        <input type="text" id="playerName" placeholder="YOUR NAME">
         <button id="newgame">START</button>
       </div>
     </section>
@@ -31,10 +36,17 @@
 
           <p>WAVE: <span id="wave"></span></p>
         </section>
-        <div class="grid">
-        </div>
+        
+        <div class="grid"></div>
+        
+        <section class="nextWave">
+          <p>NEXT</p>
+          <p>WAVE</p>
+          <p id="timer"></p>
+        </section>
+
         <div id="buttons">
-          <button id="start">START</button>
+          <!-- <button id="start">START</button> -->
           <!-- <button id="reset">reset</button> -->
         </div>
       </section>
@@ -43,13 +55,12 @@
 
     <section class="gameOver">
       <h1>GAME OVER</h1>
-      <p>FINAL SCORE: <span id="finalScore"></span></p>
-      <!-- <div class="scoreboard">
-      <h2>HIGHSCORE</h2>
-      <ol></ol>
-      <input type="text" id="playerName">
-      <button id="newgame">NEW GAME</button>
-    </div> -->
+      <h2>FINAL SCORE: <span id="finalScore"></span></h2>
+      <div class="scoreboard">
+        <h3>HIGHSCORES</h3>
+        <ol class="highscoreBoard"></ol>
+
+      </div>
 
     </section>
     <!-- <script src="apps copy.js"></script> -->

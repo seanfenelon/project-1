@@ -44,7 +44,9 @@ main {
 }
 
 .gameOver {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .scoreboard {
@@ -91,7 +93,7 @@ main {
   background-size: cover;
 }
 .alien {
-  background-image: url('alien_3.png');
+  background-image: url('saucer2b.ico');
   background-size: cover;
 }
 .bomb {
@@ -101,12 +103,6 @@ main {
 .bullet {
   background-image: url('new_nullet.png');
   background-size: cover;
-  /* position: relative;
-  width: 5px;
-  height: 20px;
-  background: red;
-  left: 5;
-  bottom: 0;  */
 }
 .stats {
   display: flex;
@@ -114,11 +110,12 @@ main {
   justify-content: space-around;
 }
 p {
-  padding: 20px;
+  padding: 10px;
 }
 .gameOver {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 button {
   margin: 10px;
@@ -126,4 +123,44 @@ button {
   width: 150px;
   font-size: 20px;
   font-family: 'Press Start 2P', cursive;
+}
+li {
+  margin: 10px;
+  
+}
+input {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  background-color: black;
+  border: 10px greenyellow;
+}
+.nextWave {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+  color: greenyellow;
+  font-size: 50px;
+  border: 5px greenyellow;
+  
+}
+@media only screen and (max-width: 600px) {
+  header {
+    font-size: 18px;
+  }
+  main {
+    font-size: 15px;
+  }
+.grid {
+  width: 90%;
+  height: 400px;
+}
+.alien {
+  background-size: contain;
+}
 }
