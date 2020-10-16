@@ -27,10 +27,10 @@ let newName
 localStorage.clear()
 // scoreboard
 let playerScores = []
-const shootAudio = new Audio('sounds/shoot.wav')
-const explosionAudio = new Audio('sounds/explosion.wav')
-const invaderKilledAudio = new Audio('sounds/invaderkilled.wav')
-const gamePlayAudio = new Audio('sounds/spaceinvaders1.mpeg')
+const shootAudio = new Audio('./sounds/shoot.wav')
+const explosionAudio = new Audio('./sounds/explosion.wav')
+const invaderKilledAudio = new Audio('./sounds/invaderkilled.wav')
+const gamePlayAudio = new Audio('./sounds/spaceinvaders1.mpeg')
 
 const scoresList = document.querySelector('ol')
 const finalScoreList = document.querySelector('.highscoreBoard')
