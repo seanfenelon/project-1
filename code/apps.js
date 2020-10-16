@@ -23,6 +23,7 @@ let reset = 1
 let wave = 1
 let shootDelay
 let newName
+
 localStorage.clear()
 // scoreboard
 let playerScores = []
@@ -119,6 +120,7 @@ cells[ship].classList.add('ship')
 
 aliensCurrent.forEach((alien) => {
   cells[alien].classList.add('alien')
+  
 })
 
 
@@ -133,17 +135,6 @@ const key = event.key
     ship +=1
     cells[ship].classList.add('ship')
   } 
-  // else if (key === 'n') {
-  //   moveLeft()
-  // } else if (key === 'm') {
-  //   moveRight()
-  // } else if (key === 'p') {
-  //   moveAliens()
-  // } 
-  // else if (key === 'l') {
-  //   playerShoot()
-  // }
-  
 })
 
 function moveAliens() {
@@ -269,8 +260,10 @@ function alienBomb(intervalMultiplier) {
   cells[randomIndex].classList.add('bomb')
 
   const generateBombInterval = setInterval(() => {
-  
-    if (cells[randomIndex].classList.contains('bomb') && aliensCurrent.length !== 0 && reset !== 0) {
+    if (aliensCurrent[aliensCurrent.length - 1] >= (width * (width - 1))) {
+      clearInterval(generateBombInterval)
+    }
+    if (cells[randomIndex].classList.contains('bomb') && aliensCurrent.length !== 0 && reset !== 0 && aliensCurrent[aliensCurrent.length - 1] < (width * (width - 1))) {
      
       if (cells[randomIndex].classList.contains('bullet')) {
         clearInterval(generateBombInterval)
@@ -310,9 +303,9 @@ function gameStart(intervalMultiplier) {
   gamePlayAudio.play()
 
   
-  const moveInterval = (500 * intervalMultiplier)
+  const moveInterval = (400 * intervalMultiplier)
   console.log(moveInterval)
-  const dropInterval = (2000 * intervalMultiplier)
+  const dropInterval = (1600 * intervalMultiplier)
 
   const letsGo = setInterval(() => {
     if (reset === 0) {
@@ -325,6 +318,7 @@ function gameStart(intervalMultiplier) {
         addHighscore()
         clearInterval(letsGo)
         clearInterval(dropBombs)
+        clearInterval(generateBombInterval)
         gameOver()
         // window.alert(`YOU SUCK! \n`  + `Final score = ${score}`)
         
@@ -402,6 +396,10 @@ function playerShoot(intervalMultiplier) {
             clearInterval(shootInterval)
             invaderKilledAudio.play()
             cells[bulletIndex].classList.remove('bullet', 'alien')
+            cells[bulletIndex].classList.add('explosion')
+            setTimeout(() => {
+              cells[bulletIndex].classList.remove('explosion')
+            }, 100)
             const alienIndex = aliensCurrent.indexOf(bulletIndex)
             aliensCurrent.splice(alienIndex, 1)
             aliensPrevious.splice(alienIndex, 1)

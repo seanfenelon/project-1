@@ -96,6 +96,11 @@ main {
   background-image: url('saucer2b.ico');
   background-size: cover;
 }
+.explosion {
+  background-image: url('untitled.png');
+  background-size: cover;
+}
+
 .bomb {
   background-image: url('alien_bomb.png');
   background-size: cover;
@@ -111,6 +116,7 @@ main {
 }
 p {
   padding: 10px;
+  font-size: 15px;
 }
 .gameOver {
   display: flex;
@@ -145,10 +151,14 @@ input {
   flex: 1;
   align-items: center;
   color: greenyellow;
-  font-size: 50px;
+  font-size: 40px;
   border: 5px greenyellow;
   
 }
+.countdowntimer {
+  font-size: 40px;
+}
+
 @media only screen and (max-width: 600px) {
   header {
     font-size: 18px;
