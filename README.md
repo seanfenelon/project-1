@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Snake was my first project of GA's Software Engineering Immersive Course.
+SPACE Invaders was my first project of GA's Software Engineering Immersive Course.
 
 Try it out h[](https://seanfenelon.github.io/project-1/)ere!
 
