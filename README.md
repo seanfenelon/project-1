@@ -4,7 +4,7 @@
 
 Snake was my first project of GA's Software Engineering Immersive Course.
 
-Try it out h[](https://seanfenelon.github.io/project-1/)ere!
+Try it out [here!](https://seanfenelon.github.io/project-1/)
 
 This JavaScript game was built solely by me in one week.
 
@@ -189,13 +189,13 @@ The intervals for alien movement, bomb generation and bomb movement, and bullet 
 There are four game screens:
 
 1. Start Screen - displays rules and highscores, requires name input and has start button.
-![](https://imgur.com/4uICzht)
+![start screen](screenshots/start_screen.png)
 2. Play Screen - grid of aliens, ship, lives, score
-![](https://imgur.com/4nzwwRl)
+![game screen](screenshots/space-invaders-game.png)
 3. Next Wave Screen - Countdown timer and wave number
-![](https://imgur.com/Bqf9c5Y)
+![next wave](screenshots/next_wave.png)
 4. Game Over Screen - Final score and highscores.
-![](https://imgur.com/rnYpN11)
+![game over](screenshots/game_over.png)
 This was a single-page project, so screens were displayed or hidden using a query selector and display property. 
 
 The countdown timer on the Next Wave Screen is a simple setInterval. The Game Over Screen returns to the start screen once the 10s setTimeout is up.

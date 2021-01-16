@@ -68,15 +68,14 @@ function addHighscore() {
       playerScores = orderedArray
     }
   } else {
-  playerScores.push(player)
+    playerScores.push(player)
   }
-  // Always do JSON.stringify when putting ARRAYS or
-  // OBJECTS into localStorage
+
   if (localStorage) {
     localStorage.setItem('scores', JSON.stringify(playerScores))
   
-  orderAndDisplayScores()
-}
+    orderAndDisplayScores()
+  }
 }
 function orderAndDisplayScores() {
   // Take the scores
@@ -106,31 +105,26 @@ const cells = []
 
 
 for (let i = 0; i < width ** 2; i++) {
-  // Create an element
   const div = document.createElement('div')
   div.classList.add('cell')
   grid.appendChild(div)
-  // div.innerHTML = i
-  // Push the div to my array of cells
   cells.push(div)
- 
 }
 
 cells[ship].classList.add('ship')
 
 aliensCurrent.forEach((alien) => {
   cells[alien].classList.add('alien')
-  
 })
 
 
 document.addEventListener('keypress', (event) => {
 const key = event.key
-  if ((key === 'a' || key === 'A') && (ship > ((width ** 2) - width))) {
+  if ((key === 'k' || key === 'K') && (ship > ((width ** 2) - width))) {
     cells[ship].classList.remove('ship')
     ship -= 1
     cells[ship].classList.add('ship')
-  } else if ((key === 's' || key === 'S') && (ship < ((width ** 2) - 1))) {
+  } else if ((key === 'l' || key === 'L') && (ship < ((width ** 2) - 1))) {
     cells[ship].classList.remove('ship')
     ship +=1
     cells[ship].classList.add('ship')
@@ -371,7 +365,7 @@ function playerShoot(intervalMultiplier) {
 
   document.addEventListener('keypress', (event) => {
     const key = event.key
-    if ((key === 'l'  || key === 'L') && shootDelay !== false) {
+    if ((key === 'a'  || key === 'A') && shootDelay !== false) {
       shootAudio.play()
       let bulletIndex = ship - width
       cells[bulletIndex].classList.add('bullet')
