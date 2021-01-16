@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Snake was my first project of GA's Software Engineering Immersive Course.
+SPACE Invaders was my first project of GA's Software Engineering Immersive Course.
 
 Try it out [here!](https://seanfenelon.github.io/project-1/)
 
@@ -21,7 +21,7 @@ This JavaScript game was built solely by me in one week.
 
 ### Space Invaders Brief
 * Build game based on the classic arcade Space Invaders
-*
+
 ### Requirements
 The player should be able to clear at least one wave of aliens
 The player's score should be displayed at the end of the game
