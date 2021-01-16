@@ -189,13 +189,29 @@ The intervals for alien movement, bomb generation and bomb movement, and bullet 
 There are four game screens:
 
 1. Start Screen - displays rules and highscores, requires name input and has start button.
-![start screen](screenshots/start_screen.png)
+
+<p align="center">
+  <img src="screenshots/start_screen.png" alt="Sublime's custom image"/>
+</p>
+
 2. Play Screen - grid of aliens, ship, lives, score
-![game screen](screenshots/space-invaders-game.png)
+
+<p align="center">
+  <img src="screenshots/space-invaders-game.png" alt="Sublime's custom image"/>
+</p>
+
 3. Next Wave Screen - Countdown timer and wave number
-![next wave](screenshots/next_wave.png)
+
+<p align="center">
+  <img src="screenshots/next_wave.png" alt="Sublime's custom image"/>
+</p>
+
 4. Game Over Screen - Final score and highscores.
-![game over](screenshots/game_over.png)
+
+<p align="center">
+  <img src="screenshots/game_over.png" alt="Sublime's custom image"/>
+</p>
+
 This was a single-page project, so screens were displayed or hidden using a query selector and display property. 
 
 The countdown timer on the Next Wave Screen is a simple setInterval. The Game Over Screen returns to the start screen once the 10s setTimeout is up.
